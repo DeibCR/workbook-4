@@ -1,5 +1,7 @@
 package com.pluralsight.hotelOperations;
 
+import java.time.LocalDateTime;
+
 public class Employee {
     private String employeeID;
     private String name;
@@ -65,6 +67,29 @@ public class Employee {
     }
 
     public void punchTimeCard(double time){
+        if (shiftTime== -1){ //Employee punch in
+            shiftTime=time;
+            System.out.println(name + "Shift start at " + time + " hours");
+        } else { // employee punch out
+            double shiftHours = time-shiftTime;
+
+            if (shiftHours<0){
+                System.out.println("Error, Your punch-out time cannot be earlier than your punch-in time");
+                return;
+            }
+            setHoursWorked(getHoursWorked()+shiftHours);
+
+            System.out.println("Shift end at " +time + " hours." + "Worked " + shiftHours + "hours this shift" );
+
+            shiftTime=-1;
+        }
+    }
+
+    //Overloaded method that uses LocalDataTime to get the time
+    public void punchTimeCard(){
+        LocalDateTime n = LocalDateTime.now();
+        double time= n.getHour() + (n.getMinute());
+
         if (shiftTime== -1){ //Employee punch in
             shiftTime=time;
             System.out.println(name + "Shift start at " + time + " hours");
