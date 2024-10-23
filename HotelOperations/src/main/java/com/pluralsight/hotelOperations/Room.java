@@ -60,4 +60,5 @@ public class Room {
                 ", dirty=" + dirty +
                 '}';
     }
+
 }
