@@ -13,6 +13,13 @@ public class Room {
         this.dirty = false;
     }
 
+    public Room(int numberOfBeds, double price, boolean occupied, boolean dirty) {
+        this.numberOfBeds = numberOfBeds;
+        this.price = price;
+        this.occupied = occupied;
+        this.dirty = dirty;
+    }
+
     public int getNumberOfBeds() {
         return numberOfBeds;
     }
@@ -42,5 +49,15 @@ public class Room {
 
     public void setDirty(boolean dirty) {
         this.dirty = dirty;
+    }
+
+    @Override
+    public String toString() {
+        return "Room{" +
+                "numberOfBeds=" + numberOfBeds +
+                ", price=" + price +
+                ", occupied=" + occupied +
+                ", dirty=" + dirty +
+                '}';
     }
 }

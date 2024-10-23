@@ -44,7 +44,7 @@ public class Employee {
         return Math.max(0,hoursWorked-40);
     }
 
-    public double getTotalpay(){
+    public double getTotalPay(){
         double totalPay;
         if (hoursWorked <=40){
             totalPay= payRate * hoursWorked;
