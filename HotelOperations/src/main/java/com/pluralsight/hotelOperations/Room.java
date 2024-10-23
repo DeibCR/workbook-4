@@ -51,6 +51,25 @@ public class Room {
         this.dirty = dirty;
     }
 
+
+    public void cleanRoom(){
+        if (dirty){
+            dirty=false;
+        }
+    }
+
+    public void checkIn(){
+        if (!occupied && !dirty)
+        occupied=true;
+        dirty=true;
+    }
+    public void checkOut(){
+        if (occupied){
+            occupied=false;
+            dirty=true;
+        }
+    }
+
     @Override
     public String toString() {
         return "Room{" +
