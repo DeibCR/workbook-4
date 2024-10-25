@@ -4,19 +4,21 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class DealerShip {
+public class Dealership {
     private String name;
     private String address;
     private String phone;
 
-    private ArrayList<Vehicle> inventory = new ArrayList<>();
+    private ArrayList<Vehicle> inventory;
 
-    public DealerShip(String name, String address, String phone, ArrayList<Vehicle> inventory) {
+    public Dealership(String name, String address, String phone, ArrayList<Vehicle> inventory) {
         this.name = name;
         this.address = address;
         this.phone = phone;
         this.inventory = inventory;
     }
+
+
 
     public List<Vehicle> getAllVehicles(){
         List<Vehicle> reversedVehicles = new ArrayList<>(inventory);
@@ -67,3 +69,5 @@ public class DealerShip {
 
 
 }
+
+
