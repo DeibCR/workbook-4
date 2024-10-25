@@ -35,6 +35,25 @@ public class DealershipFileManager {
         }
 
         public void saveDealership (Dealership dealerShip, String filename){
+            try(BufferedWriter bw= new BufferedWriter(new FileWriter(filename))){
+                for (Vehicle vehicle: dealerShip.getAllVehicles()){
+                    String data = String.join("|",
+                            String.valueOf(vehicle.getVin()),
+                            String.valueOf(vehicle.getYear()),
+                            vehicle.getMake(),
+                            vehicle.getModel(),
+                            vehicle.getVehicleType(),
+                            vehicle.getColor(),
+                            String.valueOf(vehicle.getOdometer()),
+                            String.valueOf(vehicle.getPrice())
+                            );
+                    bw.write(data);
+                    bw.newLine();
+                }
 
+
+            }catch (IOException e){
+                System.out.println("Error saving the dealership data");
+            }
         }
 }

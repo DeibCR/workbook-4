@@ -20,9 +20,13 @@ public class UserInterface {
         init();
 
         boolean exit = false;
-        displayMenu();
-        int input = getUserInput();
-        exit = processInput(input);
+        while (!exit) {
+
+
+            displayMenu();
+            int input = getUserInput();
+            exit = processInput(input);
+        }
     }
 
     private void displayMenu() {
@@ -52,22 +56,22 @@ public class UserInterface {
                 addVehicleRequest();
                 return false;
             case 3:
-               // removeVehicle();
+                removeVehicle();
                 return false;
             case 4:
-               // searchByPrice();
+                searchByPrice();
                 return false;
             case 5:
-               // searchByMakeAndModel();
+                searchByMakeAndModel();
                 return false;
             case 6:
-                //searchByColor();
+                searchByColor();
                 return false;
             case 7:
-               // searchByType();
+                searchByType();
                 return false;
             case 8:
-                //searchByMileage();
+                searchByMileage();
                 return false;
             case 9:
                 return true;
@@ -93,16 +97,71 @@ public class UserInterface {
         System.out.print("Enter vehicle mileage: ");
         int mileage = Integer.parseInt(scanner.nextLine());
         System.out.print("Enter vehicle price: ");
-        double price = Double.parseDouble(scanner.nextLine());
+        Double  price = Double.parseDouble(scanner.nextLine());
 
-        Vehicle newVehicle = new Vehicle(id, year , make, model, type, color, mileage, price);
+        Vehicle newVehicle = new Vehicle(id, year, make, model, type, color, mileage, price);
         dealership.addVehicle(newVehicle);
         System.out.println("A new vehicle has been added");
+        fileManager.saveDealership(dealership,"./src/main/resources/inventory.csv");
 
 
     }
 
+    private void removeVehicle() {
+        try {
+            System.out.println("Enter a vehicle VIN to remove: ");
+            int vin = Integer.parseInt(scanner.nextLine());
 
+            Vehicle vehicleRemove = dealership.getAllVehicles().stream().filter(vehicle -> vehicle.getVin() == vin)
+                    .findFirst().orElse(null);
+            dealership.removeVehicle(vehicleRemove);
+            System.out.println("Vehicle with the VIN: " + vin + " has been removed");
+
+
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage()); //handle vehicle not found
+        }
+
+
+    }
+
+    private void searchByPrice() {
+        System.out.println("Enter a minimum price: ");
+        Double minPrice = Double.parseDouble(scanner.nextLine());
+        System.out.println("Enter a maximum price: ");
+        Double maxPrice = Double.parseDouble(scanner.nextLine());
+        dealership.getVehiclesByPrice(minPrice, maxPrice).forEach(System.out::println);
+
+    }
+
+    private void searchByMakeAndModel() {
+        System.out.print("Enter a vehicle make: ");
+        String make = scanner.nextLine();
+        System.out.print("Enter a vehicle model: ");
+        String model = scanner.nextLine();
+        dealership.getVehiclesByMakeModel(make, model).forEach(System.out::println);
+    }
+
+    private void searchByColor() {
+        System.out.print("Enter a vehicle color: ");
+        String color = scanner.nextLine();
+        dealership.getVehiclesByColor(color).forEach(System.out::println);
+    }
+
+    private void searchByType() {
+        System.out.print("Enter a vehicle type: ");
+        String type = scanner.nextLine();
+        dealership.getVehiclesByType(type).forEach(System.out::println);
+    }
+
+    private void searchByMileage() {
+        System.out.println("Enter a maximum mileage: ");
+        Double minMileage = Double.parseDouble(scanner.nextLine());
+        System.out.println("Enter a minimum mileage: ");
+        Double maxMileage = Double.parseDouble(scanner.nextLine());
+        dealership.getVehiclesByPrice(minMileage, maxMileage).forEach(System.out::println);
+
+    }
 
 
 }
