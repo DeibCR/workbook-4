@@ -10,6 +10,7 @@ public class DealershipFileManager {
 
             try (BufferedReader br= new BufferedReader(new FileReader(filename))){
                 String line;
+                br.readLine();
 
                 while ((line = br.readLine()) !=null){
                     String[] data = line.split("\\|");

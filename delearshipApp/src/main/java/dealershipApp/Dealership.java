@@ -41,7 +41,7 @@ public class Dealership {
         return null;
     }
 
-    public List<Vehicle> getVehiclesByMake(String make, String model){
+    public List<Vehicle> getVehiclesByMakeModel(String make, String model){
 
         return null;
     }
