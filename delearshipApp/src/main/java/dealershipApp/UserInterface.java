@@ -116,6 +116,7 @@ public class UserInterface {
                     .findFirst().orElse(null);
             dealership.removeVehicle(vehicleRemove);
             System.out.println("Vehicle with the VIN: " + vin + " has been removed");
+            fileManager.saveDealership(dealership,"./src/main/resources/inventory.csv");
 
 
         } catch (IllegalArgumentException e) {

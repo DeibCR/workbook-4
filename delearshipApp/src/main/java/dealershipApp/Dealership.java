@@ -109,8 +109,17 @@ public class Dealership {
         return filterVehicles;
     }
 
+    public String getName() {
+        return name;
+    }
 
+    public String getAddress() {
+        return address;
+    }
 
+    public String getPhone() {
+        return phone;
+    }
 }
 
 
