@@ -21,10 +21,9 @@ public class DealershipGUI extends JFrame {
     private JButton searchByTypeButton;
     private JButton searchByMakeAndButton;
     private JButton searchByMileageButton;
+    private JLabel dealershipInfoLabel;
     private Dealership dealership;
     private DealershipFileManager fileManager;
-
-    // private static final Dimension BUTTON_SIZE = new Dimension(200, 40);
 
 
     public DealershipGUI() {
@@ -34,12 +33,14 @@ public class DealershipGUI extends JFrame {
         setTitle("Dealership Management System");
         setSize(600, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+
         setLayout(new BorderLayout());
         setContentPane(mainPanel);
         setVisible(true);
 
 
-       mainPanel = new JPanel();
+        mainPanel = new JPanel();
         mainPanel.setLayout(new GridLayout(8, 2));
 
 
@@ -53,7 +54,6 @@ public class DealershipGUI extends JFrame {
                 JScrollPane scrollPane = new JScrollPane(textArea);
                 scrollPane.setPreferredSize(new Dimension(500, 300)); // Width x Height
                 JOptionPane.showMessageDialog(null, scrollPane, "All Vehicles", JOptionPane.INFORMATION_MESSAGE);
-
 
             }
         });
@@ -102,8 +102,6 @@ public class DealershipGUI extends JFrame {
                         JOptionPane.showMessageDialog(null, "Invalid input. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
                     }
                 }
-
-
             }
         });
 
@@ -165,6 +163,7 @@ public class DealershipGUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
+
             }
         });
         searchByColorButton.addActionListener(new ActionListener() {
@@ -191,6 +190,7 @@ public class DealershipGUI extends JFrame {
 
             }
         });
+
     }
 
 

@@ -157,7 +157,6 @@ public class UserInterface {
         double maxPrice = promptForDouble("Enter a maximum price: ");
         headerDisplay();
         dealership.getVehiclesByPrice(minPrice, maxPrice).forEach(System.out::println);
-
     }
 
 
