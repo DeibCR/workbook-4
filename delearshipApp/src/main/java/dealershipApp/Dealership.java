@@ -23,6 +23,12 @@ public class Dealership {
     public List<Vehicle> getAllVehicles(){
         List<Vehicle> reversedVehicles = new ArrayList<>(inventory);
         Collections.reverse(reversedVehicles);
+        System.out.println("""
+                --------------------------------------------------------------------------------------------
+                                              All Vehicles
+                Vin      Year     Make        Model        Type      Color     Mileage     Price
+                --------------------------------------------------------------------------------------------
+                """);
         return reversedVehicles;
     }
 
@@ -65,10 +71,10 @@ public class Dealership {
         return filterVehicles;
     }
 
-    public List<Vehicle> getVehiclesByYear(int min, int max){
+    public List<Vehicle> getVehiclesByYear(int year){
         List<Vehicle> filterVehicles = new ArrayList<>();
         for (Vehicle vehicle: inventory){
-            if (vehicle.getYear() >=min && vehicle.getYear() <= max){
+            if (vehicle.getYear() ==year){
                 filterVehicles.add(vehicle);
             }
         }

@@ -30,7 +30,7 @@ public class UserInterface {
     }
 
     private void displayMenu() {
-        System.out.println("\n--- Dealership Menu ---");
+        System.out.println("\n------ Dealership Menu ------");
         System.out.println("1. View all vehicles");
         System.out.println("2. Add a vehicle");
         System.out.println("3. Remove a vehicle");
@@ -39,7 +39,8 @@ public class UserInterface {
         System.out.println("6. Search vehicles by color");
         System.out.println("7. Search vehicles by type");
         System.out.println("8. Search vehicles by mileage");
-        System.out.println("9. Exit");
+        System.out.println("9. Search vehicles by year");
+        System.out.println("10. Exit");
         System.out.print("Please select an option to continue:");
     }
 
@@ -74,6 +75,9 @@ public class UserInterface {
                 searchByMileage();
                 return false;
             case 9:
+                searchByYear();
+                return false;
+            case 10:
                 return true;
             default:
                 System.out.println("Invalid choice. Please try again.");
@@ -102,7 +106,7 @@ public class UserInterface {
         Vehicle newVehicle = new Vehicle(id, year, make, model, type, color, mileage, price);
         dealership.addVehicle(newVehicle);
         System.out.println("A new vehicle has been added");
-        fileManager.saveDealership(dealership,"./src/main/resources/inventory.csv");
+        fileManager.saveDealership (dealership,"./src/main/resources/inventory.csv");
 
 
     }
@@ -131,6 +135,12 @@ public class UserInterface {
         Double minPrice = Double.parseDouble(scanner.nextLine());
         System.out.println("Enter a maximum price: ");
         Double maxPrice = Double.parseDouble(scanner.nextLine());
+        System.out.println("""
+                --------------------------------------------------------------------------------------------
+                                              All Vehicles
+                Vin      Year     Make        Model        Type      Color     Mileage     Price
+                --------------------------------------------------------------------------------------------
+                """);
         dealership.getVehiclesByPrice(minPrice, maxPrice).forEach(System.out::println);
 
     }
@@ -140,28 +150,64 @@ public class UserInterface {
         String make = scanner.nextLine();
         System.out.print("Enter a vehicle model: ");
         String model = scanner.nextLine();
+        System.out.println("""
+                --------------------------------------------------------------------------------------------
+                                              All Vehicles
+                Vin      Year     Make        Model        Type      Color     Mileage     Price
+                --------------------------------------------------------------------------------------------
+                """);
         dealership.getVehiclesByMakeModel(make, model).forEach(System.out::println);
     }
 
     private void searchByColor() {
         System.out.print("Enter a vehicle color: ");
         String color = scanner.nextLine();
+        System.out.println("""
+                --------------------------------------------------------------------------------------------
+                                              All Vehicles
+                Vin      Year     Make        Model        Type      Color     Mileage     Price
+                --------------------------------------------------------------------------------------------
+                """);
         dealership.getVehiclesByColor(color).forEach(System.out::println);
     }
 
     private void searchByType() {
         System.out.print("Enter a vehicle type: ");
         String type = scanner.nextLine();
+        System.out.println("""
+                --------------------------------------------------------------------------------------------
+                                              All Vehicles
+                Vin      Year     Make        Model        Type      Color     Mileage     Price
+                --------------------------------------------------------------------------------------------
+                """);
         dealership.getVehiclesByType(type).forEach(System.out::println);
     }
 
     private void searchByMileage() {
-        System.out.println("Enter a maximum mileage: ");
-        Double minMileage = Double.parseDouble(scanner.nextLine());
         System.out.println("Enter a minimum mileage: ");
+        Double minMileage = Double.parseDouble(scanner.nextLine());
+        System.out.println("Enter a maximum mileage: ");
         Double maxMileage = Double.parseDouble(scanner.nextLine());
+        System.out.println("""
+                --------------------------------------------------------------------------------------------
+                                              All Vehicles
+                Vin      Year     Make        Model        Type      Color     Mileage     Price
+                --------------------------------------------------------------------------------------------
+                """);
         dealership.getVehiclesByPrice(minMileage, maxMileage).forEach(System.out::println);
 
+    }
+
+    private void searchByYear() {
+        System.out.print("Enter the year of the vehicles to search for: ");
+        int year = Integer.parseInt(scanner.nextLine());
+        System.out.println("""
+                --------------------------------------------------------------------------------------------
+                                              All Vehicles
+                Vin      Year     Make        Model        Type      Color     Mileage     Price
+                --------------------------------------------------------------------------------------------
+                """);
+        dealership.getVehiclesByYear(year).forEach(System.out::println);
     }
 
 
