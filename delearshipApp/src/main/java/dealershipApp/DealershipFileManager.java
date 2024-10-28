@@ -21,11 +21,10 @@ public class DealershipFileManager {
                 String type = data[4];
                 String color = data[5];
                 int odometer = Integer.parseInt(data[6]);
-                Double price = Double.parseDouble(data[7]);
+                double price = Double.parseDouble(data[7]);
                 inventory.add(new Vehicle(vin, year, make, model, type, color, odometer, price));
 
             }
-            br.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
 

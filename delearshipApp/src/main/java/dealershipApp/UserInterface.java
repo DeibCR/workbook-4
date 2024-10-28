@@ -3,9 +3,9 @@ package dealershipApp;
 import java.util.Scanner;
 
 public class UserInterface {
-    private DealershipFileManager fileManager;
+    private final DealershipFileManager fileManager;
     private Dealership dealership;
-    private Scanner scanner;
+    private final Scanner scanner;
 
     public UserInterface() {
         fileManager = new DealershipFileManager();
@@ -32,7 +32,7 @@ public class UserInterface {
     private void displayMenu() {
         System.out.println("\n================================================");
         System.out.println("\n               Dealership Menu                  ");
-        System.out.println(String.format("%s-%s-%s\n",dealership.getName(),dealership.getAddress(),dealership.getPhone()));
+        System.out.printf("%s-%s-%s\n%n",dealership.getName(),dealership.getAddress(),dealership.getPhone());
         System.out.println("\n================================================");
         System.out.printf("║ %-45s ║%n", "1. View all vehicles");
         System.out.printf("║ %-45s ║%n", "2. Add a vehicle");
@@ -53,39 +53,49 @@ public class UserInterface {
 
     private boolean processInput(int input) {
         switch (input) {
-            case 1:
-
+            case 1 -> {
                 getAllVehicles();
                 return false;
-            case 2:
+            }
+            case 2 -> {
                 addVehicleRequest();
                 return false;
-            case 3:
+            }
+            case 3 -> {
                 removeVehicle();
                 return false;
-            case 4:
+            }
+            case 4 -> {
                 searchByPrice();
                 return false;
-            case 5:
+            }
+            case 5 -> {
                 searchByMakeAndModel();
                 return false;
-            case 6:
+            }
+            case 6 -> {
                 searchByColor();
                 return false;
-            case 7:
+            }
+            case 7 -> {
                 searchByType();
                 return false;
-            case 8:
+            }
+            case 8 -> {
                 searchByMileage();
                 return false;
-            case 9:
+            }
+            case 9 -> {
                 searchByYear();
                 return false;
-            case 10:
+            }
+            case 10 -> {
                 return true;
-            default:
+            }
+            default -> {
                 System.out.println("Invalid choice. Please try again.");
                 return false;
+            }
         }
     }
 
@@ -115,7 +125,7 @@ public class UserInterface {
         System.out.print("Enter vehicle mileage: ");
         int mileage = Integer.parseInt(scanner.nextLine());
         System.out.print("Enter vehicle price: ");
-        Double price = Double.parseDouble(scanner.nextLine());
+        double price = Double.parseDouble(scanner.nextLine());
 
         Vehicle newVehicle = new Vehicle(id, year, make, model, type, color, mileage, price);
         dealership.addVehicle(newVehicle);
@@ -146,9 +156,9 @@ public class UserInterface {
 
     private void searchByPrice() {
         System.out.println("Enter a minimum price: ");
-        Double minPrice = Double.parseDouble(scanner.nextLine());
+        double minPrice = Double.parseDouble(scanner.nextLine());
         System.out.println("Enter a maximum price: ");
-        Double maxPrice = Double.parseDouble(scanner.nextLine());
+        double maxPrice = Double.parseDouble(scanner.nextLine());
         System.out.println("""
                 --------------------------------------------------------------------------------------------
                                               All Vehicles

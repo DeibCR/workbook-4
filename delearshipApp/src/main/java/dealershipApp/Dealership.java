@@ -6,11 +6,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Dealership {
-    private String name;
-    private String address;
-    private String phone;
+    private final String name;
+    private final String address;
+    private final String phone;
 
-    private ArrayList<Vehicle> inventory;
+    private final ArrayList<Vehicle> inventory;
 
     public Dealership(String name, String address, String phone, ArrayList<Vehicle> inventory) {
         this.name = name;
