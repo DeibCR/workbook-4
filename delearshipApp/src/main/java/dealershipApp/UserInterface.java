@@ -32,7 +32,7 @@ public class UserInterface {
     private void displayMenu() {
         System.out.println("\n================================================");
         System.out.println("\n               Dealership Menu                  ");
-        System.out.println(String.format("%s/%s/%s\n",dealership.getName(),dealership.getAddress(),dealership.getPhone()));
+        System.out.println(String.format("%s-%s-%s\n",dealership.getName(),dealership.getAddress(),dealership.getPhone()));
         System.out.println("\n================================================");
         System.out.printf("║ %-45s ║%n", "1. View all vehicles");
         System.out.printf("║ %-45s ║%n", "2. Add a vehicle");
@@ -44,7 +44,7 @@ public class UserInterface {
         System.out.printf("║ %-45s ║%n", "8. Search vehicles by mileage");
         System.out.printf("║ %-45s ║%n", "9. Search vehicles by year");
         System.out.printf("║ %-45s ║%n", "10. Exit");
-        System.out.print("Please select an option to continue:");
+        System.out.print("Please type an option to continue:");
     }
 
     private int getUserInput() {
