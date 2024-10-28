@@ -16,6 +16,11 @@ public class DealershipGUI extends JFrame {
     private JButton addVehicleButton;
     private JButton removeVehicleButton;
     private JButton searchByPriceButton;
+    private JButton searchByYearButton;
+    private JButton searchByColorButton;
+    private JButton searchByTypeButton;
+    private JButton searchByMakeAndButton;
+    private JButton searchByMileageButton;
     private Dealership dealership;
     private DealershipFileManager fileManager;
 
@@ -127,6 +132,60 @@ public class DealershipGUI extends JFrame {
             }
         });
         searchByPriceButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JTextField minPriceField = new JTextField();
+                JTextField maxPriceField = new JTextField();
+
+                Object[] fields = {
+                        "Minimum Price:", minPriceField,
+                        "Maximum Price:", maxPriceField
+                };
+
+                int result = JOptionPane.showConfirmDialog(null, fields, "Search by Price", JOptionPane.OK_CANCEL_OPTION);
+                if (result == JOptionPane.OK_OPTION) {
+                    try {
+                        double minPrice = Double.parseDouble(minPriceField.getText());
+                        double maxPrice = Double.parseDouble(maxPriceField.getText());
+
+                        JTextArea textArea = new JTextArea(15, 30);
+                        dealership.getVehiclesByPrice(minPrice, maxPrice).forEach(vehicle -> textArea.append(vehicle + "\n"));
+                        JScrollPane scrollPane = new JScrollPane(textArea);
+
+                        JOptionPane.showMessageDialog(null, scrollPane, "Vehicles in Price Range", JOptionPane.INFORMATION_MESSAGE);
+                    } catch (NumberFormatException ex) {
+                        JOptionPane.showMessageDialog(null, "Please enter valid numbers for price range.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+
+
+            }
+        });
+        searchByYearButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        searchByColorButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        searchByTypeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        searchByMileageButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        searchByMakeAndButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 

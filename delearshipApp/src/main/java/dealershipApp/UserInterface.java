@@ -160,6 +160,7 @@ public class UserInterface {
 
     }
 
+
     private void searchByMakeAndModel() {
         String make=promptForString("Enter a vehicle make: ");
         String model=promptForString("Enter a vehicle model: ");
