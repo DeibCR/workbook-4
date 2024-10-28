@@ -51,7 +51,8 @@ public class UserInterface {
     private boolean processInput(int input) {
         switch (input) {
             case 1:
-                dealership.getAllVehicles().forEach(System.out::println);
+               // dealership.getAllVehicles().forEach(System.out::println);
+                getAllVehicles();
                 return false;
             case 2:
                 addVehicleRequest();
@@ -83,6 +84,16 @@ public class UserInterface {
                 System.out.println("Invalid choice. Please try again.");
                 return false;
         }
+    }
+
+    public void getAllVehicles(){
+        System.out.println("""
+                --------------------------------------------------------------------------------------------
+                                              All Vehicles
+                Vin      Year     Make        Model        Type      Color     Mileage     Price
+                --------------------------------------------------------------------------------------------
+                """);
+        dealership.getAllVehicles().forEach(System.out::println);
     }
 
     private void addVehicleRequest() {
