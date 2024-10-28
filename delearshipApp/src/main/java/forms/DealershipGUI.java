@@ -1,4 +1,4 @@
-package Forms;
+package forms;
 
 import dealershipApp.Dealership;
 import dealershipApp.DealershipFileManager;
