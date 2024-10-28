@@ -31,6 +31,7 @@ public class UserInterface {
 
     private void displayMenu() {
         System.out.println("\n------ Dealership Menu ------");
+
         System.out.println("1. View all vehicles");
         System.out.println("2. Add a vehicle");
         System.out.println("3. Remove a vehicle");
@@ -51,7 +52,7 @@ public class UserInterface {
     private boolean processInput(int input) {
         switch (input) {
             case 1:
-               // dealership.getAllVehicles().forEach(System.out::println);
+                // dealership.getAllVehicles().forEach(System.out::println);
                 getAllVehicles();
                 return false;
             case 2:
@@ -86,7 +87,7 @@ public class UserInterface {
         }
     }
 
-    public void getAllVehicles(){
+    public void getAllVehicles() {
         System.out.println("""
                 --------------------------------------------------------------------------------------------
                                               All Vehicles
@@ -112,12 +113,12 @@ public class UserInterface {
         System.out.print("Enter vehicle mileage: ");
         int mileage = Integer.parseInt(scanner.nextLine());
         System.out.print("Enter vehicle price: ");
-        Double  price = Double.parseDouble(scanner.nextLine());
+        Double price = Double.parseDouble(scanner.nextLine());
 
         Vehicle newVehicle = new Vehicle(id, year, make, model, type, color, mileage, price);
         dealership.addVehicle(newVehicle);
         System.out.println("A new vehicle has been added");
-        fileManager.saveDealership (dealership,"./src/main/resources/inventory.csv");
+        fileManager.saveDealership(dealership, "./src/main/resources/inventory.csv");
 
 
     }
@@ -131,7 +132,7 @@ public class UserInterface {
                     .findFirst().orElse(null);
             dealership.removeVehicle(vehicleRemove);
             System.out.println("Vehicle with the VIN: " + vin + " has been removed");
-            fileManager.saveDealership(dealership,"./src/main/resources/inventory.csv");
+            fileManager.saveDealership(dealership, "./src/main/resources/inventory.csv");
 
 
         } catch (IllegalArgumentException e) {
@@ -196,16 +197,16 @@ public class UserInterface {
 
     private void searchByMileage() {
         System.out.println("Enter a minimum mileage: ");
-        Double minMileage = Double.parseDouble(scanner.nextLine());
+        int minMileage = Integer.parseInt(scanner.nextLine());
         System.out.println("Enter a maximum mileage: ");
-        Double maxMileage = Double.parseDouble(scanner.nextLine());
+        int maxMileage = Integer.parseInt(scanner.nextLine());
         System.out.println("""
                 --------------------------------------------------------------------------------------------
                                               All Vehicles
                 Vin      Year     Make        Model        Type      Color     Mileage     Price
                 --------------------------------------------------------------------------------------------
                 """);
-        dealership.getVehiclesByPrice(minMileage, maxMileage).forEach(System.out::println);
+        dealership.getVehiclesByMileage(minMileage, maxMileage).forEach(System.out::println);
 
     }
 

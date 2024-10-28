@@ -3,6 +3,7 @@ package dealershipApp;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Dealership {
     private String name;
@@ -44,70 +45,41 @@ public class Dealership {
 
     }
 
-    public List<Vehicle> getVehiclesByPrice(double min, double max){
-        List<Vehicle> filterVehicles = new ArrayList<>();
-        for (Vehicle vehicle : inventory){
-            if (vehicle.getPrice() >= min && vehicle.getPrice() <=max){
-                filterVehicles.add(vehicle);
-            }
-        }
-
-        return filterVehicles;
+    public List<Vehicle> getVehiclesByPrice(double min, double max) {
+        return inventory.stream()
+                .filter(vehicle -> vehicle.getPrice() >= min && vehicle.getPrice() <= max)
+                .collect(Collectors.toList());
     }
 
-    public List<Vehicle> getVehiclesByMakeModel(String make, String model){
-        List<Vehicle> filterVehicles = new ArrayList<>();
-        for (Vehicle vehicle: inventory){
-            if (vehicle.getMake().equalsIgnoreCase(make) && vehicle.getModel().equalsIgnoreCase(model)){
-                filterVehicles.add(vehicle);
-            }
-        }
-
-        return filterVehicles;
+    public List<Vehicle> getVehiclesByMakeModel(String make, String model) {
+        return inventory.stream()
+                .filter(vehicle -> vehicle.getMake().equalsIgnoreCase(make) && vehicle.getModel().equalsIgnoreCase(model))
+                .collect(Collectors.toList());
     }
 
-    public List<Vehicle> getVehiclesByYear(int year){
-        List<Vehicle> filterVehicles = new ArrayList<>();
-        for (Vehicle vehicle: inventory){
-            if (vehicle.getYear() ==year){
-                filterVehicles.add(vehicle);
-            }
-        }
-
-        return filterVehicles;
+    public List<Vehicle> getVehiclesByYear(int year) {
+        return inventory.stream()
+                .filter(vehicle -> vehicle.getYear() == year)
+                .collect(Collectors.toList());
     }
+
 
     public List<Vehicle> getVehiclesByColor(String color){
-        List<Vehicle> filterVehicles = new ArrayList<>();
-        for (Vehicle vehicle: inventory){
-            if (vehicle.getColor().equalsIgnoreCase(color)){
-                filterVehicles.add(vehicle);
-            }
-        }
-
-        return filterVehicles;
+        return inventory.stream()
+                .filter(vehicle -> vehicle.getColor().equalsIgnoreCase(color))
+                .collect(Collectors.toList());
     }
 
-    public List<Vehicle> getVehiclesByMileage(int min, int max){
-        List<Vehicle> filterVehicles = new ArrayList<>();
-        for (Vehicle vehicle: inventory){
-            if (vehicle.getOdometer() >=min && vehicle.getOdometer() <= max){
-                filterVehicles.add(vehicle);
-            }
-        }
-
-        return filterVehicles;
+    public List<Vehicle> getVehiclesByMileage(int min, int max) {
+        return inventory.stream()
+                .filter(vehicle -> vehicle.getOdometer() >= min && vehicle.getOdometer() <= max)
+                .collect(Collectors.toList());
     }
 
-    public List<Vehicle> getVehiclesByType(String vehicleType){
-        List<Vehicle> filterVehicles = new ArrayList<>();
-        for (Vehicle vehicle: inventory){
-            if (vehicle.getVehicleType().equalsIgnoreCase(vehicleType)){
-                filterVehicles.add(vehicle);
-            }
-        }
-
-        return filterVehicles;
+    public List<Vehicle> getVehiclesByType(String vehicleType) {
+        return inventory.stream()
+                .filter(vehicle -> vehicle.getVehicleType().equalsIgnoreCase(vehicleType))
+                .collect(Collectors.toList());
     }
 
     public String getName() {
