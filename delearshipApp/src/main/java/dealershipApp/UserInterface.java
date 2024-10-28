@@ -32,6 +32,7 @@ public class UserInterface {
     private void displayMenu() {
         System.out.println("\n================================================");
         System.out.println("\n               Dealership Menu                  ");
+        System.out.println(String.format("%s/%s/%s\n",dealership.getName(),dealership.getAddress(),dealership.getPhone()));
         System.out.println("\n================================================");
         System.out.printf("║ %-45s ║%n", "1. View all vehicles");
         System.out.printf("║ %-45s ║%n", "2. Add a vehicle");
@@ -53,7 +54,7 @@ public class UserInterface {
     private boolean processInput(int input) {
         switch (input) {
             case 1:
-                // dealership.getAllVehicles().forEach(System.out::println);
+
                 getAllVehicles();
                 return false;
             case 2:
