@@ -18,8 +18,7 @@ public class DealershipGUI extends JFrame {
     private Dealership dealership;
     private DealershipFileManager fileManager;
 
-   // private static final Dimension BUTTON_SIZE = new Dimension(200, 40);
-
+    // private static final Dimension BUTTON_SIZE = new Dimension(200, 40);
 
 
     public DealershipGUI() {
@@ -34,11 +33,8 @@ public class DealershipGUI extends JFrame {
         setVisible(true);
 
 
-
         mainPanel = new JPanel();
         mainPanel.setLayout(new GridLayout(8, 2));
-
-
 
 
         viewVehiclesButton.addActionListener(new ActionListener() {
@@ -95,7 +91,7 @@ public class DealershipGUI extends JFrame {
                         );
                         dealership.addVehicle(vehicle);
                         JOptionPane.showMessageDialog(null, "Vehicle added successfully.");
-                        fileManager.saveDealership (dealership,"./src/main/resources/inventory.csv");
+                        fileManager.saveDealership(dealership, "./src/main/resources/inventory.csv");
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(null, "Invalid input. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
                     }
@@ -121,7 +117,7 @@ public class DealershipGUI extends JFrame {
                     if (vehicleToRemove != null) {
                         dealership.removeVehicle(vehicleToRemove);
                         JOptionPane.showMessageDialog(null, "Vehicle removed successfully.");
-                        fileManager.saveDealership(dealership,"./src/main/resources/inventory.csv");
+                        fileManager.saveDealership(dealership, "./src/main/resources/inventory.csv");
                     } else {
                         JOptionPane.showMessageDialog(null, "Vehicle not found.", "Error", JOptionPane.ERROR_MESSAGE);
                     }

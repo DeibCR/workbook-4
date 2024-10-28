@@ -30,18 +30,19 @@ public class UserInterface {
     }
 
     private void displayMenu() {
-        System.out.println("\n------ Dealership Menu ------");
-
-        System.out.println("1. View all vehicles");
-        System.out.println("2. Add a vehicle");
-        System.out.println("3. Remove a vehicle");
-        System.out.println("4. Search vehicles by price");
-        System.out.println("5. Search vehicles by make and model");
-        System.out.println("6. Search vehicles by color");
-        System.out.println("7. Search vehicles by type");
-        System.out.println("8. Search vehicles by mileage");
-        System.out.println("9. Search vehicles by year");
-        System.out.println("10. Exit");
+        System.out.println("\n================================================");
+        System.out.println("\n               Dealership Menu                  ");
+        System.out.println("\n================================================");
+        System.out.printf("║ %-45s ║%n", "1. View all vehicles");
+        System.out.printf("║ %-45s ║%n", "2. Add a vehicle");
+        System.out.printf("║ %-45s ║%n", "3. Remove a vehicle");
+        System.out.printf("║ %-45s ║%n", "4. Search vehicles by price");
+        System.out.printf("║ %-45s ║%n", "5. Search vehicles by make and model");
+        System.out.printf("║ %-45s ║%n", "6. Search vehicles by color");
+        System.out.printf("║ %-45s ║%n", "7. Search vehicles by type");
+        System.out.printf("║ %-45s ║%n", "8. Search vehicles by mileage");
+        System.out.printf("║ %-45s ║%n", "9. Search vehicles by year");
+        System.out.printf("║ %-45s ║%n", "10. Exit");
         System.out.print("Please select an option to continue:");
     }
 
