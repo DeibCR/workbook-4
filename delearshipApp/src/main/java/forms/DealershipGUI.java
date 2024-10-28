@@ -15,6 +15,7 @@ public class DealershipGUI extends JFrame {
     private JButton viewVehiclesButton;
     private JButton addVehicleButton;
     private JButton removeVehicleButton;
+    private JButton searchByPriceButton;
     private Dealership dealership;
     private DealershipFileManager fileManager;
 
@@ -33,7 +34,7 @@ public class DealershipGUI extends JFrame {
         setVisible(true);
 
 
-        mainPanel = new JPanel();
+       mainPanel = new JPanel();
         mainPanel.setLayout(new GridLayout(8, 2));
 
 
@@ -122,6 +123,12 @@ public class DealershipGUI extends JFrame {
                         JOptionPane.showMessageDialog(null, "Vehicle not found.", "Error", JOptionPane.ERROR_MESSAGE);
                     }
                 }
+
+            }
+        });
+        searchByPriceButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
 
             }
         });

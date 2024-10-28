@@ -32,7 +32,7 @@ public class UserInterface {
     private void displayMenu() {
         System.out.println("\n================================================");
         System.out.println("\n               Dealership Menu                  ");
-        System.out.printf("%s-%s-%s\n%n",dealership.getName(),dealership.getAddress(),dealership.getPhone());
+        System.out.printf("%s-%s-%s\n%n", dealership.getName(), dealership.getAddress(), dealership.getPhone());
         System.out.println("\n================================================");
         System.out.printf("║ %-45s ║%n", "1. View all vehicles");
         System.out.printf("║ %-45s ║%n", "2. Add a vehicle");
@@ -48,8 +48,14 @@ public class UserInterface {
     }
 
     private int getUserInput() {
-        return Integer.parseInt(scanner.nextLine());
+        try {
+            return Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input. Please enter a number between 1 and 10.");
+            return -1;
+        }
     }
+
 
     private boolean processInput(int input) {
         switch (input) {
@@ -90,6 +96,7 @@ public class UserInterface {
                 return false;
             }
             case 10 -> {
+                System.out.println("Exiting application. Goodbye!");
                 return true;
             }
             default -> {
@@ -100,138 +107,120 @@ public class UserInterface {
     }
 
     public void getAllVehicles() {
-        System.out.println("""
-                --------------------------------------------------------------------------------------------
-                                              All Vehicles
-                Vin      Year     Make        Model        Type      Color     Mileage     Price
-                --------------------------------------------------------------------------------------------
-                """);
+        headerDisplay();
         dealership.getAllVehicles().forEach(System.out::println);
     }
 
     private void addVehicleRequest() {
-        System.out.print("Enter vehicle vin: ");
-        int id = Integer.parseInt(scanner.nextLine());
-        System.out.print("Enter vehicle year: ");
-        int year = Integer.parseInt(scanner.nextLine());
-        System.out.print("Enter vehicle make: ");
-        String make = scanner.nextLine();
-        System.out.print("Enter vehicle model: ");
-        String model = scanner.nextLine();
-        System.out.print("Enter vehicle type: ");
-        String type = scanner.nextLine();
-        System.out.print("Enter vehicle color: ");
-        String color = scanner.nextLine();
-        System.out.print("Enter vehicle mileage: ");
-        int mileage = Integer.parseInt(scanner.nextLine());
-        System.out.print("Enter vehicle price: ");
-        double price = Double.parseDouble(scanner.nextLine());
+        try {
+            int id = promptForInt("Enter vehicle VIN: ");
+            int year = promptForInt("Enter vehicle year: ");
+            String make = promptForString("Enter vehicle make: ");
+            String model = promptForString("Enter vehicle model: ");
+            String type = promptForString("Enter vehicle type: ");
+            String color = promptForString("Enter vehicle color: ");
+            int mileage = promptForInt("Enter vehicle mileage: ");
+            double price = promptForDouble("Enter vehicle price: ");
 
-        Vehicle newVehicle = new Vehicle(id, year, make, model, type, color, mileage, price);
-        dealership.addVehicle(newVehicle);
-        System.out.println("A new vehicle has been added");
-        fileManager.saveDealership(dealership, "./src/main/resources/inventory.csv");
-
-
+            Vehicle newVehicle = new Vehicle(id, year, make, model, type, color, mileage, price);
+            dealership.addVehicle(newVehicle);
+            System.out.println("A new vehicle has been added.");
+            saveDealershipData();
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input. Please enter the correct data types.");
+        }
     }
+
 
     private void removeVehicle() {
         try {
-            System.out.println("Enter a vehicle VIN to remove: ");
-            int vin = Integer.parseInt(scanner.nextLine());
+            int vin = promptForInt("Enter a vehicle VIN to remove: ");
+            Vehicle vehicleToRemove = dealership.getAllVehicles().stream()
+                    .filter(vehicle -> vehicle.getVin() == vin)
+                    .findFirst()
+                    .orElse(null);
 
-            Vehicle vehicleRemove = dealership.getAllVehicles().stream().filter(vehicle -> vehicle.getVin() == vin)
-                    .findFirst().orElse(null);
-            dealership.removeVehicle(vehicleRemove);
-            System.out.println("Vehicle with the VIN: " + vin + " has been removed");
-            fileManager.saveDealership(dealership, "./src/main/resources/inventory.csv");
-
-
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage()); //handle vehicle not found
+            if (vehicleToRemove != null) {
+                dealership.removeVehicle(vehicleToRemove);
+                System.out.println("Vehicle with VIN " + vin + " has been removed.");
+                saveDealershipData();
+            } else {
+                System.out.println("Vehicle not found.");
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid VIN. Please enter a valid number.");
         }
-
-
     }
 
     private void searchByPrice() {
-        System.out.println("Enter a minimum price: ");
-        double minPrice = Double.parseDouble(scanner.nextLine());
-        System.out.println("Enter a maximum price: ");
-        double maxPrice = Double.parseDouble(scanner.nextLine());
-        System.out.println("""
-                --------------------------------------------------------------------------------------------
-                                              All Vehicles
-                Vin      Year     Make        Model        Type      Color     Mileage     Price
-                --------------------------------------------------------------------------------------------
-                """);
+        double minPrice = promptForDouble("Enter a minimum price: ");
+        double maxPrice = promptForDouble("Enter a maximum price: ");
+        headerDisplay();
         dealership.getVehiclesByPrice(minPrice, maxPrice).forEach(System.out::println);
 
     }
 
     private void searchByMakeAndModel() {
-        System.out.print("Enter a vehicle make: ");
-        String make = scanner.nextLine();
-        System.out.print("Enter a vehicle model: ");
-        String model = scanner.nextLine();
-        System.out.println("""
-                --------------------------------------------------------------------------------------------
-                                              All Vehicles
-                Vin      Year     Make        Model        Type      Color     Mileage     Price
-                --------------------------------------------------------------------------------------------
-                """);
+        String make=promptForString("Enter a vehicle make: ");
+        String model=promptForString("Enter a vehicle model: ");
+        headerDisplay();
         dealership.getVehiclesByMakeModel(make, model).forEach(System.out::println);
     }
 
     private void searchByColor() {
-        System.out.print("Enter a vehicle color: ");
-        String color = scanner.nextLine();
-        System.out.println("""
-                --------------------------------------------------------------------------------------------
-                                              All Vehicles
-                Vin      Year     Make        Model        Type      Color     Mileage     Price
-                --------------------------------------------------------------------------------------------
-                """);
+        String color=promptForString("Enter a vehicle color: ");
+        headerDisplay();
         dealership.getVehiclesByColor(color).forEach(System.out::println);
     }
 
     private void searchByType() {
-        System.out.print("Enter a vehicle type: ");
-        String type = scanner.nextLine();
-        System.out.println("""
-                --------------------------------------------------------------------------------------------
-                                              All Vehicles
-                Vin      Year     Make        Model        Type      Color     Mileage     Price
-                --------------------------------------------------------------------------------------------
-                """);
+       String type=promptForString("Enter a vehicle type: ");
+        headerDisplay();
         dealership.getVehiclesByType(type).forEach(System.out::println);
     }
 
     private void searchByMileage() {
-        System.out.println("Enter a minimum mileage: ");
-        int minMileage = Integer.parseInt(scanner.nextLine());
-        System.out.println("Enter a maximum mileage: ");
-        int maxMileage = Integer.parseInt(scanner.nextLine());
-        System.out.println("""
-                --------------------------------------------------------------------------------------------
-                                              All Vehicles
-                Vin      Year     Make        Model        Type      Color     Mileage     Price
-                --------------------------------------------------------------------------------------------
-                """);
+        int minMileage=promptForInt("Enter a minimum mileage: ");
+        int maxMileage=promptForInt("Enter a maximum mileage: ");
+        headerDisplay();
         dealership.getVehiclesByMileage(minMileage, maxMileage).forEach(System.out::println);
 
     }
 
     private void searchByYear() {
-        System.out.print("Enter the year of the vehicles to search for: ");
-        int year = Integer.parseInt(scanner.nextLine());
+        int year=promptForInt("Enter the year of the vehicles to search for: ");
+        headerDisplay();
+        dealership.getVehiclesByYear(year).forEach(System.out::println);
+    }
+
+    //helpers methods to clean the code:
+
+    public void headerDisplay() {
         System.out.println("""
                 --------------------------------------------------------------------------------------------
                                               All Vehicles
                 Vin      Year     Make        Model        Type      Color     Mileage     Price
                 --------------------------------------------------------------------------------------------
                 """);
-        dealership.getVehiclesByYear(year).forEach(System.out::println);
+    }
+
+    private int promptForInt(String message) {
+        System.out.print(message);
+        return Integer.parseInt(scanner.nextLine());
+    }
+
+    private String promptForString(String message) {
+        System.out.print(message);
+        return scanner.nextLine();
+    }
+
+    private double promptForDouble(String message) {
+        System.out.print(message);
+        return Double.parseDouble(scanner.nextLine());
+    }
+
+    private void saveDealershipData() {
+        fileManager.saveDealership(dealership, "./src/main/resources/inventory.csv");
     }
 
 
